@@ -1,4 +1,5 @@
-﻿
+﻿using StringResources = bntu.vsrpp.vmilyuk.lab1.Resources.String;
+
 namespace bntu.vsrpp.vmilyuk.lab1
 {
     partial class MainWindow
@@ -55,9 +56,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Прочитать файл";
+            this.button1.Text = StringResources.ResourceManager.GetString("MainWindow.Button.ReadFile");
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -66,7 +66,7 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Кол-во узлов = ";
+            this.label1.Text = StringResources.ResourceManager.GetString("MainWindow.Label.NodesCount");
             // 
             // comboBox1
             // 
@@ -83,7 +83,7 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 15);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Выберите доступный параметр";
+            this.label2.Text = StringResources.ResourceManager.GetString("MainWindow.Label.SelectAvailableOption");
             // 
             // button2
             // 
@@ -91,9 +91,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(167, 38);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Найти максимальное значение";
+            this.button2.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMaxValueOperation");
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -103,7 +102,7 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(162, 21);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Результат операции: ";
+            this.label3.Text = StringResources.ResourceManager.GetString("MainWindow.Label.OperatonResult");
             // 
             // label4
             // 
@@ -112,7 +111,7 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(167, 15);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Список доступных операций";
+            this.label4.Text = StringResources.ResourceManager.GetString("MainWindow.Label.ListAvailableOperations"); 
             // 
             // button3
             // 
@@ -120,9 +119,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(167, 38);
             this.button3.TabIndex = 7;
-            this.button3.Text = "Найти минимальное значение";
+            this.button3.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMinValueOperation");
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -130,9 +128,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(167, 38);
             this.button4.TabIndex = 8;
-            this.button4.Text = "Найти среднее значение";
+            this.button4.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindAverageValueOperation"); 
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label5
             // 
@@ -142,7 +139,7 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(156, 21);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Название операции:";
+            this.label5.Text = StringResources.ResourceManager.GetString("MainWindow.Label.OperationName"); 
             // 
             // button5
             // 
@@ -150,9 +147,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(167, 38);
             this.button5.TabIndex = 10;
-            this.button5.Text = "Найти максимульную длину строки";
+            this.button5.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMaxLengthOperation");
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label6
             // 
@@ -161,7 +157,7 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(166, 15);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Над числовыми значениями";
+            this.label6.Text = StringResources.ResourceManager.GetString("MainWindow.Label.OverNumericValues");
             // 
             // label7
             // 
@@ -170,7 +166,7 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 15);
             this.label7.TabIndex = 12;
-            this.label7.Text = "Над строками";
+            this.label7.Text = StringResources.ResourceManager.GetString("MainWindow.Label.OverStrings");
             // 
             // button6
             // 
@@ -178,9 +174,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(167, 38);
             this.button6.TabIndex = 13;
-            this.button6.Text = "Найти минимальную длину строки";
+            this.button6.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMinLengthOperation");
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -188,9 +183,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(167, 38);
             this.button7.TabIndex = 14;
-            this.button7.Text = "Найти среднюю длину строки";
+            this.button7.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindAverageLengthOperation");
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // openFileDialog1
             // 
@@ -202,9 +196,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.bntOpenFile.Name = "bntOpenFile";
             this.bntOpenFile.Size = new System.Drawing.Size(155, 43);
             this.bntOpenFile.TabIndex = 15;
-            this.bntOpenFile.Text = "Открыть файл";
+            this.bntOpenFile.Text = StringResources.ResourceManager.GetString("MainWindow.Button.OpenFile"); 
             this.bntOpenFile.UseVisualStyleBackColor = true;
-            this.bntOpenFile.Click += new System.EventHandler(this.bntOpenFile_Click);
             // 
             // btnEdit
             // 
@@ -212,9 +205,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(180, 43);
             this.btnEdit.TabIndex = 17;
-            this.btnEdit.Text = "Изменить и сохранить файл";
+            this.btnEdit.Text = StringResources.ResourceManager.GetString("MainWindow.Button.EditAndSave"); 
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // Form1
             // 

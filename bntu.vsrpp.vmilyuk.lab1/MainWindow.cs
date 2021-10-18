@@ -1,18 +1,20 @@
 ﻿using bntu.vsrpp.vmilyuk.Core;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using StringResources = bntu.vsrpp.vmilyuk.lab1.Resources.String;
 
 namespace bntu.vsrpp.vmilyuk.lab1
 {
     public partial class MainWindow : Form
     {
+        #region Const strings
+        private const string FileWasOpened = "File was opened successful.";
+        private const string FileWasEditedAndClosed = "File was edited and saved successful.";
+        #endregion
+
         private readonly XMLReader _reader;
         private readonly XMLEditor _editor;
+
         private string path;
 
         public MainWindow(XMLReader reader, XMLEditor editor)
@@ -20,13 +22,37 @@ namespace bntu.vsrpp.vmilyuk.lab1
             _reader = reader;
             _editor = editor;
             InitializeComponent();
+            InitializeHandle();
             openFileDialog1.Filter = "XML files(*.xml)|*.xml";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void InitializeHandle()
+        {
+            button1.Click +=
+                ReadOpenedFile;
+            button2.Click +=
+                FindMaxValue;
+            button3.Click +=
+                FindMinValue;
+            button4.Click +=
+                FindAverageValue;
+            button5.Click +=
+                FindMaxLength;
+            button6.Click +=
+                FindMinLength;
+            button7.Click +=
+                FindAverageLength;
+            bntOpenFile.Click +=
+                ShowOpenFileDialog;
+            btnEdit.Click +=
+                EditAndSaveFile;
+        }
+
+        private void ReadOpenedFile(object sender, EventArgs e)
         {
             comboBox1.Items.Clear();
-            label1.Text = "Кол-во nodes = " + _reader.GetNodesCount();
+            label1.Text = StringResources.ResourceManager.GetString("MainWindow.NodesCount")
+                + _reader.GetNodesCount();
             comboBox1.Items.AddRange(_reader.GetAvailiableStrings().ToArray());
             try
             {
@@ -34,102 +60,143 @@ namespace bntu.vsrpp.vmilyuk.lab1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка.Список параметров не был составлен.");
+                ShowErrorMessageBox(ex);
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void FindMaxValue(object sender, EventArgs e)
         {
-            label5.Text = "Название операции: \"Поиск максимального значения\"";
+            label5.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
+                + StringResources.ResourceManager.GetString("MainWindow.FindMaxValueOperation");
             try
             {
-                label3.Text = "Результат операции: " + _reader.GetMax(comboBox1.SelectedItem.ToString());
+                int max = _reader.GetMax(comboBox1.SelectedItem.ToString());
+                label3.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + max;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка во время поиска максимального значения.");
+                ShowOperationErrorMessageBox(ex);
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void FindMinValue(object sender, EventArgs e)
         {
-            label5.Text = "Название операции: \"Поиск минимального значения\"";
+            label5.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
+                + StringResources.ResourceManager.GetString("MainWindow.FindMinValueOperation");
             try
             {
-                label3.Text = "Результат операции: " + _reader.GetMin(comboBox1.SelectedItem.ToString());
+                int min = _reader.GetMin(comboBox1.SelectedItem.ToString());
+                label3.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + min;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка во время поиска минимального значения.");
+                ShowOperationErrorMessageBox(ex);
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void FindAverageValue(object sender, EventArgs e)
         {
-            label5.Text = "Название операции: \"Поиск среднего значения\"";
+            label5.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
+                + StringResources.ResourceManager.GetString("MainWindow.FindAverageValueOperation");
             try
             {
-                label3.Text = "Результат операции: " + _reader.GetAverage(comboBox1.SelectedItem.ToString()).ToString("#0.00");
+                double result = _reader.GetAverage(comboBox1.SelectedItem.ToString());
+                label3.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + FormatString(result);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка во время поиска среднего значения.");
+                ShowOperationErrorMessageBox(ex);
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void FindMaxLength(object sender, EventArgs e)
         {
-            label5.Text = "Название операции: \"Поиск максимальной длины\"";
+            label5.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
+                + StringResources.ResourceManager.GetString("MainWindow.FindMaxLengthOperation");
             try
             {
-                label3.Text = "Результат операции: " + _reader.GetMaxLength(comboBox1.SelectedItem.ToString());
+                int max = _reader.GetMaxLength(comboBox1.SelectedItem.ToString());
+                label3.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + max;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка во время поиска максимальной длины.");
+                ShowOperationErrorMessageBox(ex);
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void FindMinLength(object sender, EventArgs e)
         {
-            label5.Text = "Название операции: \"Поиск минимальной длины\"";
+            label5.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
+                + StringResources.ResourceManager.GetString("MainWindow.FindMinLengthOperation");
             try
             {
-                label3.Text = "Результат операции: " + _reader.GetMinLength(comboBox1.SelectedItem.ToString());
+                int min = _reader.GetMinLength(comboBox1.SelectedItem.ToString());
+                label3.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + min;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка во время поиска минимальной длины.");
+                ShowOperationErrorMessageBox(ex);
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void FindAverageLength(object sender, EventArgs e)
         {
-            label5.Text = "Название операции: \"Поиск средней длины\"";
+            label5.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
+                + StringResources.ResourceManager.GetString("MainWindow.FindAverageLengthOperation");
             try
             {
-                label3.Text = "Результат операции: " + _reader.GetAverageLength(comboBox1.SelectedItem.ToString()).ToString("#0.00");
+                double result = _reader.GetAverageLength(comboBox1.SelectedItem.ToString());
+                label3.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + FormatString(result);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка во время поиска средней длины.");
+                ShowOperationErrorMessageBox(ex);
             }
         }
 
-        private void bntOpenFile_Click(object sender, EventArgs e)
+        private void ShowOpenFileDialog(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
 
             path = openFileDialog1.FileName;
             _reader.ReadXML(path);
-            MessageBox.Show("Файл открыт");
+            MessageBox.Show(FileWasOpened);
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void EditAndSaveFile(object sender, EventArgs e)
         {
             _editor.CreateNewXML(path);
-            MessageBox.Show("Файл успешно изменён и сохранён");
+            MessageBox.Show(FileWasEditedAndClosed);
+        }
+
+        private void ShowErrorMessageBox(Exception ex)
+        {
+            MessageBox.Show(StringResources.ResourceManager.GetString("MainWindow.MessageBox.OperationError")
+                + ex.Message.ToLower());
+        }
+
+        private void ShowOperationErrorMessageBox(Exception ex)
+        {
+            ChangeLabelTextDueError();
+            ShowErrorMessageBox(ex);
+        }
+
+        private void ChangeLabelTextDueError()
+        {
+            label3.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + StringResources.ResourceManager.GetString("MainWindow.OperationError");
+        }
+
+        private string FormatString(double formattedString)
+        {
+            return formattedString.ToString("#0.00").TrimEnd('0', ',');
         }
     }
 }
