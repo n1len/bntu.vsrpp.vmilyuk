@@ -7,29 +7,23 @@ namespace bntu.vsrpp.vmilyuk.Core
 {
     public class XMLReader
     {
-        private List<XElement> Node = new List<XElement>();
-        private List<string> ChildNode = new List<string>();
-        private List<string> AvaliableStringValues = new List<string>();
-
+        /// <summary>
+        /// Read xml file
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public XDocument ReadXML(string path)
         {
-            ClearAllLists();
             XDocument xml = XDocument.Load(path);
-            foreach (XElement node in xml.Elements())
-            {
-                foreach (XElement child in node.Elements())
-                {
-                    Node.Add(child);
-                    foreach (XElement item in child.Elements())
-                    {
-                        ChildNode.Add(item.Name.ToString());
-                    }
-                }
-            }
             return xml;
         }
 
-        public int GetNodesCount()
+        /// <summary>
+        /// Returns count child nodes
+        /// </summary>
+        /// <param name="ChildNode"></param>
+        /// <returns></returns>
+        public int GetNodesCount(List<string> ChildNode)
         {
             var count = ChildNode.Count();
             return count;
@@ -39,7 +33,7 @@ namespace bntu.vsrpp.vmilyuk.Core
         /// Method that displays the available options for operations
         /// </summary>
         /// <returns>Available options</returns>
-        public List<string> GetAvailiableStrings()
+        public List<string> GetAvailiableStrings(List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
             var value = ChildNode.Distinct().ToList();
             foreach (string item in value)
@@ -57,9 +51,9 @@ namespace bntu.vsrpp.vmilyuk.Core
         /// </summary>
         /// <param name="element">Combobox selected item</param>
         /// <returns></returns>
-        private List<int> GetIntValues(string element)
+        private List<int> GetIntValues(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            GetAvailiableStrings();
+            GetAvailiableStrings(ChildNode, Node, AvaliableStringValues);
             List<int> values = new List<int>();
 
             foreach (var item in Node)
@@ -77,9 +71,9 @@ namespace bntu.vsrpp.vmilyuk.Core
         /// </summary>
         /// <param name="element">Combobox selected item</param>
         /// <returns></returns>
-        private List<string> GetStringValues(string element)
+        private List<string> GetStringValues(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            GetAvailiableStrings();
+            GetAvailiableStrings(ChildNode, Node, AvaliableStringValues);
             List<string> values = new List<string>();
 
             foreach (var item in Node)
@@ -92,49 +86,92 @@ namespace bntu.vsrpp.vmilyuk.Core
             return values;
         }
 
-        private void ClearAllLists()
-        {
-            Node.Clear();
-            ChildNode.Clear();
-            AvaliableStringValues.Clear();
-        }
-
         #region ShitMethodsToDisplayResult
-        public int GetMaxLength(string element)
+
+        /// <summary>
+        /// Returns max length of the string
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="ChildNode"></param>
+        /// <param name="Node"></param>
+        /// <param name="AvaliableStringValues"></param>
+        /// <returns></returns>
+        public int GetMaxLength(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            var str = GetStringValues(element).OrderByDescending(s => s.Length).First();
+            var str = GetStringValues(element, ChildNode, Node, AvaliableStringValues).OrderByDescending(s => s.Length).First();
             return str.Length;
         }
 
-        public int GetMinLength(string element)
+        /// <summary>
+        /// Returns min length of the string
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="ChildNode"></param>
+        /// <param name="Node"></param>
+        /// <param name="AvaliableStringValues"></param>
+        /// <returns></returns>
+        public int GetMinLength(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            var str = GetStringValues(element).OrderBy(s => s.Length).First();
+            var str = GetStringValues(element, ChildNode, Node, AvaliableStringValues).OrderBy(s => s.Length).First();
             return str.Length;
         }
 
-        public double GetAverageLength(string element)
+        /// <summary>
+        /// Returns average length of the string
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="ChildNode"></param>
+        /// <param name="Node"></param>
+        /// <param name="AvaliableStringValues"></param>
+        /// <returns></returns>
+        public double GetAverageLength(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            var average = GetStringValues(element).Average(x => x.Length);
+            var average = GetStringValues(element, ChildNode, Node, AvaliableStringValues).Average(x => x.Length);
             return average;
         }
 
-        public int GetMax(string element)
+        /// <summary>
+        /// Returns max numeric value
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="ChildNode"></param>
+        /// <param name="Node"></param>
+        /// <param name="AvaliableStringValues"></param>
+        /// <returns></returns>
+        public int GetMax(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            var max = GetIntValues(element).Max();
+            var max = GetIntValues(element, ChildNode, Node, AvaliableStringValues).Max();
             return max;
         }
 
-        public int GetMin(string element)
+        /// <summary>
+        /// Returns min numeric value
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="ChildNode"></param>
+        /// <param name="Node"></param>
+        /// <param name="AvaliableStringValues"></param>
+        /// <returns></returns>
+        public int GetMin(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            var min = GetIntValues(element).Min();
+            var min = GetIntValues(element, ChildNode, Node, AvaliableStringValues).Min();
             return min;
         }
 
-        public double GetAverage(string element)
+        /// <summary>
+        /// Returns average numeric value
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="ChildNode"></param>
+        /// <param name="Node"></param>
+        /// <param name="AvaliableStringValues"></param>
+        /// <returns></returns>
+        public double GetAverage(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
         {
-            var average = GetIntValues(element).Average();
+            var average = GetIntValues(element, ChildNode, Node, AvaliableStringValues).Average();
             return average;
         }
+
         #endregion
     }
 }

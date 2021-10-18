@@ -1,4 +1,5 @@
 using bntu.vsrpp.vmilyuk.Core;
+using bntu.vsrpp.vmilyuk.lab1.Process;
 using System;
 using System.Windows.Forms;
 
@@ -17,7 +18,8 @@ namespace bntu.vsrpp.vmilyuk.lab1
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow(reader, editor));
+            var mainWindowProcess = new MainWindowProcess(reader, editor);
+            Application.Run(mainWindowProcess.Start());
         }
     }
 }

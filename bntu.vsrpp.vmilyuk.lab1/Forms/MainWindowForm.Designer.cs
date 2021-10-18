@@ -2,7 +2,7 @@
 
 namespace bntu.vsrpp.vmilyuk.lab1
 {
-    partial class MainWindow
+    partial class MainWindowForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,34 +30,34 @@ namespace bntu.vsrpp.vmilyuk.lab1
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnReadOpenedFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnFindMaxValue = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnFindMinValue = new System.Windows.Forms.Button();
+            this.btnFindAverageValue = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnFindMaxLength = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnFindMinLength = new System.Windows.Forms.Button();
+            this.btnFindAverageLength = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.bntOpenFile = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnOpenFile = new System.Windows.Forms.Button();
+            this.btnEditAndSaveFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(11, 78);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = StringResources.ResourceManager.GetString("MainWindow.Button.ReadFile");
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnReadOpenedFile.Location = new System.Drawing.Point(11, 78);
+            this.btnReadOpenedFile.Name = "button1";
+            this.btnReadOpenedFile.Size = new System.Drawing.Size(155, 23);
+            this.btnReadOpenedFile.TabIndex = 0;
+            this.btnReadOpenedFile.Text = StringResources.ResourceManager.GetString("MainWindow.Button.ReadFile");
+            this.btnReadOpenedFile.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -87,12 +87,12 @@ namespace bntu.vsrpp.vmilyuk.lab1
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 199);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(167, 38);
-            this.button2.TabIndex = 4;
-            this.button2.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMaxValueOperation");
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnFindMaxValue.Location = new System.Drawing.Point(12, 199);
+            this.btnFindMaxValue.Name = "button2";
+            this.btnFindMaxValue.Size = new System.Drawing.Size(167, 38);
+            this.btnFindMaxValue.TabIndex = 4;
+            this.btnFindMaxValue.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMaxValueOperation");
+            this.btnFindMaxValue.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -115,21 +115,21 @@ namespace bntu.vsrpp.vmilyuk.lab1
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(13, 243);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(167, 38);
-            this.button3.TabIndex = 7;
-            this.button3.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMinValueOperation");
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnFindMinValue.Location = new System.Drawing.Point(13, 243);
+            this.btnFindMinValue.Name = "button3";
+            this.btnFindMinValue.Size = new System.Drawing.Size(167, 38);
+            this.btnFindMinValue.TabIndex = 7;
+            this.btnFindMinValue.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMinValueOperation");
+            this.btnFindMinValue.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(13, 287);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(167, 38);
-            this.button4.TabIndex = 8;
-            this.button4.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindAverageValueOperation"); 
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnFindAverageValue.Location = new System.Drawing.Point(13, 287);
+            this.btnFindAverageValue.Name = "button4";
+            this.btnFindAverageValue.Size = new System.Drawing.Size(167, 38);
+            this.btnFindAverageValue.TabIndex = 8;
+            this.btnFindAverageValue.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindAverageValueOperation"); 
+            this.btnFindAverageValue.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -143,12 +143,12 @@ namespace bntu.vsrpp.vmilyuk.lab1
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(195, 199);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(167, 38);
-            this.button5.TabIndex = 10;
-            this.button5.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMaxLengthOperation");
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnFindMaxLength.Location = new System.Drawing.Point(195, 199);
+            this.btnFindMaxLength.Name = "button5";
+            this.btnFindMaxLength.Size = new System.Drawing.Size(167, 38);
+            this.btnFindMaxLength.TabIndex = 10;
+            this.btnFindMaxLength.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMaxLengthOperation");
+            this.btnFindMaxLength.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -170,21 +170,21 @@ namespace bntu.vsrpp.vmilyuk.lab1
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(195, 243);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(167, 38);
-            this.button6.TabIndex = 13;
-            this.button6.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMinLengthOperation");
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnFindMinLength.Location = new System.Drawing.Point(195, 243);
+            this.btnFindMinLength.Name = "button6";
+            this.btnFindMinLength.Size = new System.Drawing.Size(167, 38);
+            this.btnFindMinLength.TabIndex = 13;
+            this.btnFindMinLength.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindMinLengthOperation");
+            this.btnFindMinLength.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(195, 287);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(167, 38);
-            this.button7.TabIndex = 14;
-            this.button7.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindAverageLengthOperation");
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnFindAverageLength.Location = new System.Drawing.Point(195, 287);
+            this.btnFindAverageLength.Name = "button7";
+            this.btnFindAverageLength.Size = new System.Drawing.Size(167, 38);
+            this.btnFindAverageLength.TabIndex = 14;
+            this.btnFindAverageLength.Text = StringResources.ResourceManager.GetString("MainWindow.Button.FindAverageLengthOperation");
+            this.btnFindAverageLength.UseVisualStyleBackColor = true;
             // 
             // openFileDialog1
             // 
@@ -192,44 +192,44 @@ namespace bntu.vsrpp.vmilyuk.lab1
             // 
             // bntOpenFile
             // 
-            this.bntOpenFile.Location = new System.Drawing.Point(11, 9);
-            this.bntOpenFile.Name = "bntOpenFile";
-            this.bntOpenFile.Size = new System.Drawing.Size(155, 43);
-            this.bntOpenFile.TabIndex = 15;
-            this.bntOpenFile.Text = StringResources.ResourceManager.GetString("MainWindow.Button.OpenFile"); 
-            this.bntOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Location = new System.Drawing.Point(11, 9);
+            this.btnOpenFile.Name = "bntOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(155, 43);
+            this.btnOpenFile.TabIndex = 15;
+            this.btnOpenFile.Text = StringResources.ResourceManager.GetString("MainWindow.Button.OpenFile"); 
+            this.btnOpenFile.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(172, 9);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(180, 43);
-            this.btnEdit.TabIndex = 17;
-            this.btnEdit.Text = StringResources.ResourceManager.GetString("MainWindow.Button.EditAndSave"); 
-            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEditAndSaveFile.Location = new System.Drawing.Point(172, 9);
+            this.btnEditAndSaveFile.Name = "btnEdit";
+            this.btnEditAndSaveFile.Size = new System.Drawing.Size(180, 43);
+            this.btnEditAndSaveFile.TabIndex = 17;
+            this.btnEditAndSaveFile.Text = StringResources.ResourceManager.GetString("MainWindow.Button.EditAndSave"); 
+            this.btnEditAndSaveFile.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(810, 342);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.bntOpenFile);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.btnEditAndSaveFile);
+            this.Controls.Add(this.btnOpenFile);
+            this.Controls.Add(this.btnFindAverageLength);
+            this.Controls.Add(this.btnFindMinLength);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btnFindMaxLength);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnFindAverageValue);
+            this.Controls.Add(this.btnFindMinValue);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnFindMaxValue);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnReadOpenedFile);
             this.Name = "Form1";
             this.Text = "Modern XML Parser";
             this.ResumeLayout(false);
@@ -238,23 +238,23 @@ namespace bntu.vsrpp.vmilyuk.lab1
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReadOpenedFile;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnFindMaxValue;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnFindMinValue;
+        private System.Windows.Forms.Button btnFindAverageValue;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnFindMaxLength;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnFindMinLength;
+        private System.Windows.Forms.Button btnFindAverageLength;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button bntOpenFile;
-        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnOpenFile;
+        private System.Windows.Forms.Button btnEditAndSaveFile;
     }
 }

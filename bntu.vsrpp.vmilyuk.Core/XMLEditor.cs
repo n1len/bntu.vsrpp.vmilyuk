@@ -4,16 +4,20 @@ namespace bntu.vsrpp.vmilyuk.Core
 {
     public class XMLEditor
     {
-        private readonly XMLReader _reader;
+        private readonly XMLReader reader;
 
         public XMLEditor(XMLReader reader)
         {
-            _reader = reader;
+            this.reader = reader;
         }
 
+        /// <summary>
+        /// Create new xml, after changing file
+        /// </summary>
+        /// <param name="path"></param>
         public void CreateNewXML(string path)
         {
-            var xml = _reader.ReadXML(path);
+            var xml = reader.ReadXML(path);
             foreach (XElement node in xml.Elements())
             {
                 foreach (XElement child in node.Elements())
