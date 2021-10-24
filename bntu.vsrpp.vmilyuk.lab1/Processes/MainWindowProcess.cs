@@ -89,7 +89,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 + StringResources.ResourceManager.GetString("MainWindow.FindMaxValueOperation");
             try
             {
-                int max = reader.GetMax(Form.AvailableItemsComboBox.SelectedItem.ToString(), ChildNode, Node, AvaliableStringValues);
+                int max = reader.GetMax(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
                 Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
                     + max;
             }
@@ -105,7 +105,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 + StringResources.ResourceManager.GetString("MainWindow.FindMinValueOperation");
             try
             {
-                int min = reader.GetMin(Form.AvailableItemsComboBox.SelectedItem.ToString(), ChildNode, Node, AvaliableStringValues);
+                int min = reader.GetMin(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
                 Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
                     + min;
             }
@@ -121,7 +121,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 + StringResources.ResourceManager.GetString("MainWindow.FindAverageValueOperation");
             try
             {
-                double average = reader.GetAverage(Form.AvailableItemsComboBox.SelectedItem.ToString(), ChildNode, Node, AvaliableStringValues);
+                double average = reader.GetAverage(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
                 Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
                     + FormatString(average);
             }
@@ -137,7 +137,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 + StringResources.ResourceManager.GetString("MainWindow.FindMaxLengthOperation");
             try
             {
-                int maxLength = reader.GetMaxLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), ChildNode, Node, AvaliableStringValues);
+                int maxLength = reader.GetMaxLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
                 Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
                     + maxLength;
             }
@@ -153,7 +153,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 + StringResources.ResourceManager.GetString("MainWindow.FindMinLengthOperation");
             try
             {
-                int minLength = reader.GetMinLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), ChildNode, Node, AvaliableStringValues);
+                int minLength = reader.GetMinLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
                 Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
                     + minLength;
             }
@@ -169,7 +169,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 + StringResources.ResourceManager.GetString("MainWindow.FindAverageLengthOperation");
             try
             {
-                double averageLength = reader.GetAverageLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), ChildNode, Node, AvaliableStringValues);
+                double averageLength = reader.GetAverageLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
                 Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
                     + FormatString(averageLength);
             }

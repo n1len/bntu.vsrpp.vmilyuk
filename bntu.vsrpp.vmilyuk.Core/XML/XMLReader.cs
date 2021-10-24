@@ -51,9 +51,8 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// </summary>
         /// <param name="element">Combobox selected item</param>
         /// <returns></returns>
-        private List<int> GetIntValues(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        private List<int> GetIntValues(string element, List<XElement> Node)
         {
-            GetAvailiableStrings(ChildNode, Node, AvaliableStringValues);
             List<int> values = new List<int>();
 
             foreach (var item in Node)
@@ -71,9 +70,8 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// </summary>
         /// <param name="element">Combobox selected item</param>
         /// <returns></returns>
-        private List<string> GetStringValues(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        private List<string> GetStringValues(string element, List<XElement> Node)
         {
-            GetAvailiableStrings(ChildNode, Node, AvaliableStringValues);
             List<string> values = new List<string>();
 
             foreach (var item in Node)
@@ -92,13 +90,11 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// Returns max length of the string
         /// </summary>
         /// <param name="element"></param>
-        /// <param name="ChildNode"></param>
         /// <param name="Node"></param>
-        /// <param name="AvaliableStringValues"></param>
         /// <returns></returns>
-        public int GetMaxLength(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        public int GetMaxLength(string element, List<XElement> Node)
         {
-            var str = GetStringValues(element, ChildNode, Node, AvaliableStringValues).OrderByDescending(s => s.Length).First();
+            var str = GetStringValues(element, Node).OrderByDescending(s => s.Length).First();
             return str.Length;
         }
 
@@ -106,13 +102,11 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// Returns min length of the string
         /// </summary>
         /// <param name="element"></param>
-        /// <param name="ChildNode"></param>
         /// <param name="Node"></param>
-        /// <param name="AvaliableStringValues"></param>
         /// <returns></returns>
-        public int GetMinLength(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        public int GetMinLength(string element, List<XElement> Node)
         {
-            var str = GetStringValues(element, ChildNode, Node, AvaliableStringValues).OrderBy(s => s.Length).First();
+            var str = GetStringValues(element, Node).OrderBy(s => s.Length).First();
             return str.Length;
         }
 
@@ -120,13 +114,11 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// Returns average length of the string
         /// </summary>
         /// <param name="element"></param>
-        /// <param name="ChildNode"></param>
         /// <param name="Node"></param>
-        /// <param name="AvaliableStringValues"></param>
         /// <returns></returns>
-        public double GetAverageLength(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        public double GetAverageLength(string element, List<XElement> Node)
         {
-            var average = GetStringValues(element, ChildNode, Node, AvaliableStringValues).Average(x => x.Length);
+            var average = GetStringValues(element, Node).Average(x => x.Length);
             return average;
         }
 
@@ -134,13 +126,11 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// Returns max numeric value
         /// </summary>
         /// <param name="element"></param>
-        /// <param name="ChildNode"></param>
         /// <param name="Node"></param>
-        /// <param name="AvaliableStringValues"></param>
         /// <returns></returns>
-        public int GetMax(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        public int GetMax(string element, List<XElement> Node)
         {
-            var max = GetIntValues(element, ChildNode, Node, AvaliableStringValues).Max();
+            var max = GetIntValues(element, Node).Max();
             return max;
         }
 
@@ -148,13 +138,11 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// Returns min numeric value
         /// </summary>
         /// <param name="element"></param>
-        /// <param name="ChildNode"></param>
         /// <param name="Node"></param>
-        /// <param name="AvaliableStringValues"></param>
         /// <returns></returns>
-        public int GetMin(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        public int GetMin(string element, List<XElement> Node)
         {
-            var min = GetIntValues(element, ChildNode, Node, AvaliableStringValues).Min();
+            var min = GetIntValues(element, Node).Min();
             return min;
         }
 
@@ -162,13 +150,11 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// Returns average numeric value
         /// </summary>
         /// <param name="element"></param>
-        /// <param name="ChildNode"></param>
         /// <param name="Node"></param>
-        /// <param name="AvaliableStringValues"></param>
         /// <returns></returns>
-        public double GetAverage(string element, List<string> ChildNode, List<XElement> Node, List<string> AvaliableStringValues)
+        public double GetAverage(string element, List<XElement> Node)
         {
-            var average = GetIntValues(element, ChildNode, Node, AvaliableStringValues).Average();
+            var average = GetIntValues(element, Node).Average();
             return average;
         }
 
