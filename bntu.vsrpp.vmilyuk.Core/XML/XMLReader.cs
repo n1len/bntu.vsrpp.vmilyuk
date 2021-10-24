@@ -21,7 +21,7 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
         /// <summary>
         /// Returns count child nodes
         /// </summary>
-        /// <param name="ChildNode"></param>
+        /// <param name="Node"></param>
         /// <returns></returns>
         public int GetNodesCount(List<XElement> Node)
         {
