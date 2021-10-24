@@ -6,6 +6,12 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
     {
         private readonly XMLReader reader;
 
+        #region Const variables
+        private const int FileExtensionLength = 4;
+
+        private const string PartOfFileOutputNameWithFileExtension = "_output.xml";
+        #endregion
+
         public XMLEditor(XMLReader reader)
         {
             this.reader = reader;
@@ -37,7 +43,7 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
                     }
                 }
             }
-            xml.Save(path.Remove(path.Length - 4) + "_output.xml");
+            xml.Save(path.Remove(path.Length - FileExtensionLength) + PartOfFileOutputNameWithFileExtension);
         }
     }
 }
