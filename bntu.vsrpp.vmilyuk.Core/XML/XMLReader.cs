@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace bntu.vsrpp.vmilyuk.Core
+namespace bntu.vsrpp.vmilyuk.Core.XML
 {
     public class XMLReader
     {
@@ -23,9 +23,9 @@ namespace bntu.vsrpp.vmilyuk.Core
         /// </summary>
         /// <param name="ChildNode"></param>
         /// <returns></returns>
-        public int GetNodesCount(List<string> ChildNode)
+        public int GetNodesCount(List<XElement> Node)
         {
-            var count = ChildNode.Count();
+            var count = Node.Count();
             return count;
         }
 

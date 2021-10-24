@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace bntu.vsrpp.vmilyuk.lab1
+namespace bntu.vsrpp.vmilyuk.lab1.Forms
 {
     public partial class MainWindowForm : Form
     {

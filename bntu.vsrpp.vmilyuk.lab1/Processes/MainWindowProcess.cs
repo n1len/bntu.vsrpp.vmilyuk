@@ -1,4 +1,5 @@
-﻿using bntu.vsrpp.vmilyuk.Core;
+﻿using bntu.vsrpp.vmilyuk.Core.XML;
+using bntu.vsrpp.vmilyuk.lab1.Forms;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -64,7 +65,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
         private void ReadOpenedFile(object sender, EventArgs e)
         {
             var availiableStrings = reader.GetAvailiableStrings(ChildNode, Node, AvaliableStringValues).ToArray();
-            var nodesCount = reader.GetNodesCount(ChildNode);
+            var nodesCount = reader.GetNodesCount(Node);
 
             Form.AvailableItemsComboBox.Items.Clear();
 
@@ -186,19 +187,22 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
             path = Form.OpenFileDialog.FileName;
             var xml = reader.ReadXML(path);
             InitializeLists(xml);
-            MessageBox.Show(FileWasOpened);
+            MessageBox.Show(FileWasOpened, StringResources.ResourceManager.GetString("MainWindow.MessageBox.Success"),
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void EditAndSaveFile(object sender, EventArgs e)
         {
             editor.CreateNewXML(path);
-            MessageBox.Show(FileWasEditedAndClosed);
+            MessageBox.Show(FileWasEditedAndClosed, StringResources.ResourceManager.GetString("MainWindow.MessageBox.Success"),
+                MessageBoxButtons.OK,MessageBoxIcon.Information); 
         }
 
         private void ShowErrorMessageBox(Exception ex)
         {
-            MessageBox.Show(StringResources.ResourceManager.GetString("MainWindow.MessageBox.OperationError")
-                + ex.Message.ToLower());
+            MessageBox.Show(StringResources.ResourceManager.GetString("MainWindow.MessageBox.OperationError") + ex.Message.ToLower(),
+                StringResources.ResourceManager.GetString("MainWindow.MessageBox.Error"),
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ShowOperationErrorMessageBox(Exception ex)

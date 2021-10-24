@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace bntu.vsrpp.vmilyuk.Core
+namespace bntu.vsrpp.vmilyuk.Core.XML
 {
     public class XMLEditor
     {

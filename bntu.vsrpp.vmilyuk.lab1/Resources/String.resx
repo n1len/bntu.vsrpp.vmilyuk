@@ -183,8 +183,14 @@
   <data name="MainWindow.Label.SelectAvailableOption" xml:space="preserve">
     <value>Select an available option</value>
   </data>
+  <data name="MainWindow.MessageBox.Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="MainWindow.MessageBox.OperationError" xml:space="preserve">
     <value>Error, </value>
+  </data>
+  <data name="MainWindow.MessageBox.Success" xml:space="preserve">
+    <value>Success</value>
   </data>
   <data name="MainWindow.NodesCount" xml:space="preserve">
     <value>Nodes count = </value>

@@ -1,4 +1,4 @@
-using bntu.vsrpp.vmilyuk.Core;
+using bntu.vsrpp.vmilyuk.Core.XML;
 using bntu.vsrpp.vmilyuk.lab1.Process;
 using System;
 using System.Windows.Forms;

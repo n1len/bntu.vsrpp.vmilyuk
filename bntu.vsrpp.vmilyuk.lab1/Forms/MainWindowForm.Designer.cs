@@ -1,6 +1,6 @@
 ﻿using StringResources = bntu.vsrpp.vmilyuk.lab1.Resources.String;
 
-namespace bntu.vsrpp.vmilyuk.lab1
+namespace bntu.vsrpp.vmilyuk.lab1.Forms
 {
     partial class MainWindowForm
     {

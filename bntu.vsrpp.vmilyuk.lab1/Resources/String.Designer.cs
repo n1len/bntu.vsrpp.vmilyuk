@@ -259,11 +259,29 @@ namespace bntu.vsrpp.vmilyuk.lab1.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Error.
+        /// </summary>
+        internal static string MainWindow_MessageBox_Error {
+            get {
+                return ResourceManager.GetString("MainWindow.MessageBox.Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Error, .
         /// </summary>
         internal static string MainWindow_MessageBox_OperationError {
             get {
                 return ResourceManager.GetString("MainWindow.MessageBox.OperationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Success.
+        /// </summary>
+        internal static string MainWindow_MessageBox_Success {
+            get {
+                return ResourceManager.GetString("MainWindow.MessageBox.Success", resourceCulture);
             }
         }
         
