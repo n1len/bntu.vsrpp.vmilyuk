@@ -212,7 +212,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 342);
+            this.ClientSize = new System.Drawing.Size(840, 342);
             this.Controls.Add(this.btnEditAndSaveFile);
             this.Controls.Add(this.btnOpenFile);
             this.Controls.Add(this.btnFindAverageLength);
@@ -232,6 +232,8 @@ namespace bntu.vsrpp.vmilyuk.lab1.Forms
             this.Controls.Add(this.btnReadOpenedFile);
             this.Name = "Form1";
             this.Text = "Modern XML Parser";
+            this.MaximizeBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.ResumeLayout(false);
             this.PerformLayout();
         }

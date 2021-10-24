@@ -7,6 +7,11 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
 {
     public class XMLReader
     {
+        #region Const varibales
+        private const string NodeHaveString = "One or more node(s) have string value(s), operation aborted.";
+        private const string NodeHaveInt = "One or more node(s) have int value(s), operation aborted.";
+        #endregion
+
         /// <summary>
         /// Read xml file
         /// </summary>
@@ -46,6 +51,40 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
             return AvaliableStringValues;
         }
 
+        public string GetAvailiableOperations(string element, List<XElement> Node)
+        {
+            string temp = string.Empty;
+            try
+            {
+                GetIntValues(element, Node);
+            }
+            catch(Exception ex)
+            {
+                switch (ex.Message)
+                {
+                    case NodeHaveString:
+                        temp += "string";
+                        break;
+                }
+            }
+
+            try
+            {
+                GetStringValues(element, Node);
+            }
+            catch (Exception ex)
+            {
+                switch (ex.Message)
+                {
+                    case NodeHaveInt:
+                        temp += "int";
+                        break;
+                }
+            }
+
+            return temp;
+        }
+
         /// <summary>
         /// Getting a list of numbers for number operations
         /// </summary>
@@ -60,6 +99,8 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
                 foreach (var i in item.Elements().Where(x => x.Name.ToString().Equals(element)))
                     if (Int32.TryParse(i.Value, out int temp))
                         values.Add(temp);
+                    else
+                        throw new Exception(NodeHaveString);
             }
 
             return values;
@@ -79,6 +120,8 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
                 foreach (var i in item.Elements().Where(x => x.Name.ToString().Equals(element)))
                     if (!Int32.TryParse(i.Value, out int temp))
                         values.Add(i.Value.ToString());
+                    else
+                        throw new Exception(NodeHaveInt);
             }
 
             return values;

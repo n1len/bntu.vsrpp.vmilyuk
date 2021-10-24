@@ -60,6 +60,8 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 ShowOpenFileDialog;
             Form.BtnEditAndSaveFile.Click +=
                 EditAndSaveFile;
+            Form.AvailableItemsComboBox.SelectedIndexChanged +=
+                ShowAvailiableOperations;
         }
 
         private void ReadOpenedFile(object sender, EventArgs e)
@@ -179,6 +181,45 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
             }
         }
 
+        private void ShowAvailiableOperations(object sender, EventArgs e)
+        {
+            string availiableOperations = reader.GetAvailiableOperations(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
+
+            switch (availiableOperations)
+            {
+                case "string":
+                    VisibleIntValuesOperations(false);
+                    VisibleStringValuesOperations(true);
+                    break;
+                case "int":
+                    VisibleIntValuesOperations(true);
+                    VisibleStringValuesOperations(false);
+                    break;
+                case "stringint":
+                    VisibleIntValuesOperations(false);
+                    VisibleStringValuesOperations(false);
+                    break;
+                default:
+                    VisibleIntValuesOperations(true);
+                    VisibleStringValuesOperations(true);
+                    break;
+            }
+        }
+
+        private void VisibleIntValuesOperations(bool isTrue)
+        {
+            Form.BtnFindMaxValue.Visible = isTrue;
+            Form.BtnFindMinValue.Visible = isTrue;
+            Form.BtnFindAverageValue.Visible = isTrue;
+        }
+
+        private void VisibleStringValuesOperations(bool isTrue)
+        {
+            Form.BtnFindMaxLength.Visible = isTrue;
+            Form.BtnFindMinLength.Visible = isTrue;
+            Form.BtnFindAverageLength.Visible = isTrue;
+        }
+
         private void ShowOpenFileDialog(object sender, EventArgs e)
         {
             if (Form.OpenFileDialog.ShowDialog() == DialogResult.Cancel)
@@ -219,7 +260,7 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
 
         private string FormatString(double formattedString)
         {
-            return formattedString.ToString("#0.00").TrimEnd('0', ',');
+            return formattedString.ToString("#0.00");
         }
 
         private void InitializeLists(XDocument xml)
