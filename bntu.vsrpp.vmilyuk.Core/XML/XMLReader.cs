@@ -51,9 +51,16 @@ namespace bntu.vsrpp.vmilyuk.Core.XML
             return AvaliableStringValues;
         }
 
+        /// <summary>
+        /// Returns string of availiable operation(s)
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="Node"></param>
+        /// <returns></returns>
         public string GetAvailiableOperations(string element, List<XElement> Node)
         {
             string temp = string.Empty;
+
             try
             {
                 GetIntValues(element, Node);

@@ -1,4 +1,5 @@
-﻿using bntu.vsrpp.vmilyuk.Core.XML;
+﻿using bntu.vsrpp.vmilyuk.Core.Enums;
+using bntu.vsrpp.vmilyuk.Core.XML;
 using bntu.vsrpp.vmilyuk.lab1.Forms;
 using System;
 using System.Collections.Generic;
@@ -85,100 +86,123 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
             }
         }
 
-        private void FindMaxValue(object sender, EventArgs e)
+        private void ExecuteOperation(Operations operation)
+        {
+            if(Form.AvailableItemsComboBox.SelectedItem != null)
+            {
+                try
+                {
+                    switch (operation)
+                    {
+                        case Operations.FindMinValue:
+                            ChangeOperationLabel(StringResources.ResourceManager.GetString("MainWindow.FindMinValueOperation"));
+                            int min = reader.GetMin(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
+                            ChangeResultLabel(min);
+                            break;
+
+                        case Operations.FindMaxValue:
+                            ChangeOperationLabel(StringResources.ResourceManager.GetString("MainWindow.FindMaxValueOperation"));
+                            int max = reader.GetMax(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
+                            ChangeResultLabel(max);
+                            break;
+
+                        case Operations.FindAverageValue:
+                            ChangeOperationLabel(StringResources.ResourceManager.GetString("MainWindow.FindAverageValueOperation"));
+                            double average = reader.GetAverage(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
+                            ChangeResultLabel(average);
+                            break;
+
+                        case Operations.FindMinLength:
+                            ChangeOperationLabel(StringResources.ResourceManager.GetString("MainWindow.FindMinLengthOperation"));
+                            int minLength = reader.GetMinLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
+                            ChangeResultLabel(minLength);
+                            break;
+
+                        case Operations.FindMaxLength:
+                            ChangeOperationLabel(StringResources.ResourceManager.GetString("MainWindow.FindMaxLengthOperation"));
+                            int maxLength = reader.GetMaxLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
+                            ChangeResultLabel(maxLength);
+                            break;
+
+                        case Operations.FindAverangeLength:
+                            ChangeOperationLabel(StringResources.ResourceManager.GetString("MainWindow.FindAverageLengthOperation"));
+                            double averageLength = reader.GetAverageLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
+                            ChangeResultLabel(averageLength);
+                            break;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    ShowOperationErrorMessageBox(ex);
+                }
+                
+            }
+        }
+
+        private void ChangeOperationLabel(string resourceString)
         {
             Form.OperationNameLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
-                + StringResources.ResourceManager.GetString("MainWindow.FindMaxValueOperation");
-            try
-            {
-                int max = reader.GetMax(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
-                Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
-                    + max;
-            }
-            catch (Exception ex)
-            {
-                ShowOperationErrorMessageBox(ex);
-            }
+                + resourceString;
+        }
+
+        private void ChangeResultLabel(double value)
+        {
+            Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                        + FormatString(value);
+        }
+
+        private string FormatString(double formattedString)
+        {
+            return formattedString.ToString("#0.00");
+        }
+
+        private void ShowOperationErrorMessageBox(Exception ex)
+        {
+            ChangeLabelTextDueError();
+            ShowErrorMessageBox(ex);
+        }
+
+        private void ChangeLabelTextDueError()
+        {
+            Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
+                    + StringResources.ResourceManager.GetString("MainWindow.OperationError");
+        }
+
+        private void ShowErrorMessageBox(Exception ex)
+        {
+            MessageBox.Show(StringResources.ResourceManager.GetString("MainWindow.MessageBox.OperationError") + ex.Message.ToLower(),
+                StringResources.ResourceManager.GetString("MainWindow.MessageBox.Error"),
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void FindMaxValue(object sender, EventArgs e)
+        {
+            ExecuteOperation(Operations.FindMaxValue);
         }
 
         private void FindMinValue(object sender, EventArgs e)
         {
-            Form.OperationNameLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
-                + StringResources.ResourceManager.GetString("MainWindow.FindMinValueOperation");
-            try
-            {
-                int min = reader.GetMin(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
-                Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
-                    + min;
-            }
-            catch (Exception ex)
-            {
-                ShowOperationErrorMessageBox(ex);
-            }
+            ExecuteOperation(Operations.FindMinValue);
         }
 
         private void FindAverageValue(object sender, EventArgs e)
         {
-            Form.OperationNameLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
-                + StringResources.ResourceManager.GetString("MainWindow.FindAverageValueOperation");
-            try
-            {
-                double average = reader.GetAverage(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
-                Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
-                    + FormatString(average);
-            }
-            catch (Exception ex)
-            {
-                ShowOperationErrorMessageBox(ex);
-            }
+            ExecuteOperation(Operations.FindAverageValue);
         }
 
         private void FindMaxLength(object sender, EventArgs e)
         {
-            Form.OperationNameLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
-                + StringResources.ResourceManager.GetString("MainWindow.FindMaxLengthOperation");
-            try
-            {
-                int maxLength = reader.GetMaxLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
-                Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
-                    + maxLength;
-            }
-            catch (Exception ex)
-            {
-                ShowOperationErrorMessageBox(ex);
-            }
+            ExecuteOperation(Operations.FindMaxLength);
         }
 
         private void FindMinLength(object sender, EventArgs e)
         {
-            Form.OperationNameLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
-                + StringResources.ResourceManager.GetString("MainWindow.FindMinLengthOperation");
-            try
-            {
-                int minLength = reader.GetMinLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
-                Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
-                    + minLength;
-            }
-            catch (Exception ex)
-            {
-                ShowOperationErrorMessageBox(ex);
-            }
+            ExecuteOperation(Operations.FindMinLength);
         }
 
         private void FindAverageLength(object sender, EventArgs e)
         {
-            Form.OperationNameLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationName")
-                + StringResources.ResourceManager.GetString("MainWindow.FindAverageLengthOperation");
-            try
-            {
-                double averageLength = reader.GetAverageLength(Form.AvailableItemsComboBox.SelectedItem.ToString(), Node);
-                Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
-                    + FormatString(averageLength);
-            }
-            catch (Exception ex)
-            {
-                ShowOperationErrorMessageBox(ex);
-            }
+            ExecuteOperation(Operations.FindAverangeLength);
         }
 
         private void ShowAvailiableOperations(object sender, EventArgs e)
@@ -237,30 +261,6 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
             editor.CreateNewXML(path);
             MessageBox.Show(FileWasEditedAndClosed, StringResources.ResourceManager.GetString("MainWindow.MessageBox.Success"),
                 MessageBoxButtons.OK,MessageBoxIcon.Information); 
-        }
-
-        private void ShowErrorMessageBox(Exception ex)
-        {
-            MessageBox.Show(StringResources.ResourceManager.GetString("MainWindow.MessageBox.OperationError") + ex.Message.ToLower(),
-                StringResources.ResourceManager.GetString("MainWindow.MessageBox.Error"),
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void ShowOperationErrorMessageBox(Exception ex)
-        {
-            ChangeLabelTextDueError();
-            ShowErrorMessageBox(ex);
-        }
-
-        private void ChangeLabelTextDueError()
-        {
-            Form.OperationResultLabel.Text = StringResources.ResourceManager.GetString("MainWindow.OperationResult")
-                    + StringResources.ResourceManager.GetString("MainWindow.OperationError");
-        }
-
-        private string FormatString(double formattedString)
-        {
-            return formattedString.ToString("#0.00");
         }
 
         private void InitializeLists(XDocument xml)
