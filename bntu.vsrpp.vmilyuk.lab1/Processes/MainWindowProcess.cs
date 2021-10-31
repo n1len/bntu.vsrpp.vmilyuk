@@ -135,7 +135,6 @@ namespace bntu.vsrpp.vmilyuk.lab1.Process
                 {
                     ShowOperationErrorMessageBox(ex);
                 }
-                
             }
         }
 
