@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bntu.vsrpp.vmilyuk.Core", "bntu.vsrpp.vmilyuk.Core\bntu.vsrpp.vmilyuk.Core.csproj", "{CA6B4FC0-AD3D-45E6-8D8A-94DFCBC67743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bntu.vsrpp.vmilyuk.lab1", "bntu.vsrpp.vmilyuk.lab1\bntu.vsrpp.vmilyuk.lab1.csproj", "{6DD71724-A007-414A-A144-FB4210BD87BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bntu.vsrpp.vmilyuk.lab1", "bntu.vsrpp.vmilyuk.lab1\bntu.vsrpp.vmilyuk.lab1.csproj", "{6DD71724-A007-414A-A144-FB4210BD87BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bntu.vsrpp.vmilyuk.lab2", "bntu.vsrpp.vmilyuk.lab2\bntu.vsrpp.vmilyuk.lab2.csproj", "{D46282E9-8D28-4313-9777-289E61A1598C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6DD71724-A007-414A-A144-FB4210BD87BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DD71724-A007-414A-A144-FB4210BD87BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DD71724-A007-414A-A144-FB4210BD87BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46282E9-8D28-4313-9777-289E61A1598C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46282E9-8D28-4313-9777-289E61A1598C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46282E9-8D28-4313-9777-289E61A1598C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46282E9-8D28-4313-9777-289E61A1598C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
