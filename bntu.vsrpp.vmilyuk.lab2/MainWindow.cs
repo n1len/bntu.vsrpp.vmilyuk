@@ -38,7 +38,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                 {
                     curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox1.SelectedItem.ToString());
 
-                    HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Code + "?parammode=1").Result;
+                    HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
 
                     var result = await response.Content.ReadAsStringAsync();
 
@@ -48,7 +48,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        response = client.GetAsync("rates/" + curr.Cur_Code + "?parammode=1").Result;
+                        response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
 
                         result = await response.Content.ReadAsStringAsync();
 
@@ -56,13 +56,14 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         float.TryParse(textBox2.Text, out count);
 
-                        textBox1.Text = (count * (secondCurrency.Cur_OfficialRate / firstCurrency.Cur_OfficialRate)).ToString();
+                        textBox1.Text = (count * (firstCurrency.Cur_Scale / secondCurrency.Cur_Scale) *
+                            (secondCurrency.Cur_OfficialRate / firstCurrency.Cur_OfficialRate)).ToString();
                     }
                     else
                     {
                         float.TryParse(textBox2.Text, out count);
 
-                        textBox1.Text = (count / firstCurrency.Cur_OfficialRate).ToString();
+                        textBox1.Text = (count * firstCurrency.Cur_Scale / firstCurrency.Cur_OfficialRate).ToString();
                     }
                 }
                 else
@@ -71,7 +72,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Code + "?parammode=1").Result;
+                        HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
 
                         var result = await response.Content.ReadAsStringAsync();
 
@@ -79,7 +80,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         float.TryParse(textBox2.Text, out count);
 
-                        textBox1.Text = (count * secondCurrency.Cur_OfficialRate).ToString();
+                        textBox1.Text = (count / secondCurrency.Cur_Scale * secondCurrency.Cur_OfficialRate).ToString();
                     }
                     else
                     {
@@ -101,7 +102,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
             comboBox1.SelectedItem = comboBox1.Items[0];
             comboBox2.SelectedItem = comboBox2.Items[0];
 
-            HttpResponseMessage response = client.GetAsync("currencies").Result;
+            HttpResponseMessage response = client.GetAsync("rates?periodicity=0").Result;
 
             var result = await response.Content.ReadAsStringAsync();
 
@@ -124,7 +125,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                 {
                     curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox1.SelectedItem.ToString());
 
-                    HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Code + "?parammode=1").Result;
+                    HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
 
                     var result = await response.Content.ReadAsStringAsync();
 
@@ -134,7 +135,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        response = client.GetAsync("rates/" + curr.Cur_Code + "?parammode=1").Result;
+                        response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
 
                         result = await response.Content.ReadAsStringAsync();
 
@@ -142,13 +143,14 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         float.TryParse(textBox1.Text, out count);
 
-                        textBox2.Text = (count * (firstCurrency.Cur_OfficialRate / secondCurrency.Cur_OfficialRate)).ToString();
+                        textBox2.Text = (count / (firstCurrency.Cur_Scale / secondCurrency.Cur_Scale) * 
+                            (firstCurrency.Cur_OfficialRate / secondCurrency.Cur_OfficialRate)).ToString();
                     }
                     else
                     {
                         float.TryParse(textBox1.Text, out count);
 
-                        textBox2.Text = (count * firstCurrency.Cur_OfficialRate).ToString();
+                        textBox2.Text = (count / firstCurrency.Cur_Scale * firstCurrency.Cur_OfficialRate).ToString();
                     }
                 }
                 else
@@ -157,7 +159,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Code + "?parammode=1").Result;
+                        HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
 
                         var result = await response.Content.ReadAsStringAsync();
 
@@ -165,7 +167,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         float.TryParse(textBox1.Text, out count);
 
-                        textBox2.Text = (count / secondCurrency.Cur_OfficialRate).ToString();
+                        textBox2.Text = (count * secondCurrency.Cur_Scale / secondCurrency.Cur_OfficialRate).ToString();
                     }
                     else
                     {
