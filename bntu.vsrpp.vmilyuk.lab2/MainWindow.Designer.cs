@@ -35,8 +35,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.btnShowDiagram = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -89,20 +88,22 @@ namespace bntu.vsrpp.vmilyuk.lab2
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 6;
             // 
-            // pictureBox1
+            // btnShowDiagram
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(13, 132);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(482, 306);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.btnShowDiagram.Location = new System.Drawing.Point(131, 169);
+            this.btnShowDiagram.Name = "btnShowDiagram";
+            this.btnShowDiagram.Size = new System.Drawing.Size(123, 23);
+            this.btnShowDiagram.TabIndex = 12;
+            this.btnShowDiagram.Text = "Display diagram";
+            this.btnShowDiagram.UseVisualStyleBackColor = true;
+            this.btnShowDiagram.Click += new System.EventHandler(this.btnShowDiagram_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 450);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(421, 222);
+            this.Controls.Add(this.btnShowDiagram);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox2);
@@ -111,7 +112,6 @@ namespace bntu.vsrpp.vmilyuk.lab2
             this.Controls.Add(this.button1);
             this.Name = "MainWindow";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,7 +125,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnShowDiagram;
     }
 }
 

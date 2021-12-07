@@ -1,5 +1,8 @@
 ﻿using bntu.vsrpp.vmilyuk.Core.Models;
 using Newtonsoft.Json;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +45,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                     var result = await response.Content.ReadAsStringAsync();
 
-                    var firstCurrency = JsonConvert.DeserializeObject<Currency>(result);
+                    var firstCurrency = JsonConvert.DeserializeObject<Rate>(result);
 
                     if (comboBox2.SelectedItem.ToString() != "BYN")
                     {
@@ -52,18 +55,18 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         result = await response.Content.ReadAsStringAsync();
 
-                        var secondCurrency = JsonConvert.DeserializeObject<Currency>(result);
+                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
 
                         float.TryParse(textBox2.Text, out count);
 
                         textBox1.Text = (count * (firstCurrency.Cur_Scale / secondCurrency.Cur_Scale) *
-                            (secondCurrency.Cur_OfficialRate / firstCurrency.Cur_OfficialRate)).ToString();
+                            (float)(secondCurrency.Cur_OfficialRate / firstCurrency.Cur_OfficialRate)).ToString();
                     }
                     else
                     {
                         float.TryParse(textBox2.Text, out count);
 
-                        textBox1.Text = (count * firstCurrency.Cur_Scale / firstCurrency.Cur_OfficialRate).ToString();
+                        textBox1.Text = (count * (float)(firstCurrency.Cur_Scale) / (float)firstCurrency.Cur_OfficialRate).ToString();
                     }
                 }
                 else
@@ -76,11 +79,11 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         var result = await response.Content.ReadAsStringAsync();
 
-                        var secondCurrency = JsonConvert.DeserializeObject<Currency>(result);
+                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
 
                         float.TryParse(textBox2.Text, out count);
 
-                        textBox1.Text = (count / secondCurrency.Cur_Scale * secondCurrency.Cur_OfficialRate).ToString();
+                        textBox1.Text = (count / (float)secondCurrency.Cur_Scale * (float)secondCurrency.Cur_OfficialRate).ToString();
                     }
                     else
                     {
@@ -129,7 +132,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                     var result = await response.Content.ReadAsStringAsync();
 
-                    var firstCurrency = JsonConvert.DeserializeObject<Currency>(result);
+                    var firstCurrency = JsonConvert.DeserializeObject<Rate>(result);
 
                     if (comboBox2.SelectedItem.ToString() != "BYN")
                     {
@@ -139,18 +142,18 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         result = await response.Content.ReadAsStringAsync();
 
-                        var secondCurrency = JsonConvert.DeserializeObject<Currency>(result);
+                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
 
                         float.TryParse(textBox1.Text, out count);
 
                         textBox2.Text = (count / (firstCurrency.Cur_Scale / secondCurrency.Cur_Scale) * 
-                            (firstCurrency.Cur_OfficialRate / secondCurrency.Cur_OfficialRate)).ToString();
+                            (float)(firstCurrency.Cur_OfficialRate / secondCurrency.Cur_OfficialRate)).ToString();
                     }
                     else
                     {
                         float.TryParse(textBox1.Text, out count);
 
-                        textBox2.Text = (count / firstCurrency.Cur_Scale * firstCurrency.Cur_OfficialRate).ToString();
+                        textBox2.Text = (count / (float)firstCurrency.Cur_Scale * (float)firstCurrency.Cur_OfficialRate).ToString();
                     }
                 }
                 else
@@ -163,11 +166,11 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
                         var result = await response.Content.ReadAsStringAsync();
 
-                        var secondCurrency = JsonConvert.DeserializeObject<Currency>(result);
+                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
 
                         float.TryParse(textBox1.Text, out count);
 
-                        textBox2.Text = (count * secondCurrency.Cur_Scale / secondCurrency.Cur_OfficialRate).ToString();
+                        textBox2.Text = (count * secondCurrency.Cur_Scale / (float)secondCurrency.Cur_OfficialRate).ToString();
                     }
                     else
                     {
@@ -180,6 +183,12 @@ namespace bntu.vsrpp.vmilyuk.lab2
                 MessageBox.Show("Ошибка, низя такую конвертацию сделать.");
             }
             
+        }
+
+        private void btnShowDiagram_Click(object sender, EventArgs e)
+        {
+            ChartWindow window = new ChartWindow(currencies);
+            window.Show();
         }
     }
 }
