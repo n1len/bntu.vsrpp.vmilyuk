@@ -41,7 +41,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                 {
                     curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox1.SelectedItem.ToString());
 
-                    HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
+                    HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
 
                     var result = await response.Content.ReadAsStringAsync();
 
@@ -51,7 +51,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
+                        response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
 
                         result = await response.Content.ReadAsStringAsync();
 
@@ -75,7 +75,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
+                        HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
 
                         var result = await response.Content.ReadAsStringAsync();
 
@@ -128,7 +128,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                 {
                     curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox1.SelectedItem.ToString());
 
-                    HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
+                    HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
 
                     var result = await response.Content.ReadAsStringAsync();
 
@@ -138,7 +138,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
+                        response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
 
                         result = await response.Content.ReadAsStringAsync();
 
@@ -162,7 +162,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
 
-                        HttpResponseMessage response = client.GetAsync("rates/" + curr.Cur_Abbreviation + "?parammode=2").Result;
+                        HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
 
                         var result = await response.Content.ReadAsStringAsync();
 
