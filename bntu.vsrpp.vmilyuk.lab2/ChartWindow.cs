@@ -42,14 +42,14 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
         private async void btnShowDiagram_Click(object sender, EventArgs e)
         {
-            var curr = currencies.FirstOrDefault(c => (c.Cur_Scale + " " + c.Cur_Name) == comboBox1.SelectedItem.ToString());
-
-            var startDate = startDateTime.Value;
-            var endDate = endDateTime.Value;
-            
             if (ValidateDateTime())
             {
-                var request = $"rates/dynamics/{curr.Cur_ID}?startDate={startDate.ToString("yyyy-M-d")}&endDate={endDate.ToString("yyyy - M - d")}";
+                var curr = currencies.FirstOrDefault(c => (c.Cur_Scale + " " + c.Cur_Name) == comboBox1.SelectedItem.ToString());
+
+                var startDate = startDateTime.Value;
+                var endDate = endDateTime.Value;
+
+                var request = $"rates/dynamics/{curr.Cur_ID}?startDate={startDate:yyyy-M-d}&endDate={endDate:yyyy-M-d}";
 
                 HttpResponseMessage response = client.GetAsync(request).Result;
 
