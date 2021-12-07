@@ -46,44 +46,57 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
             var startDate = startDateTime.Value;
             var endDate = endDateTime.Value;
-
-            var request = "rates/dynamics/" + curr.Cur_ID + "?startDate=" + startDate.ToString("yyyy-M-d") + "&endDate=" + endDate.ToString("yyyy-M-d");
-
-            HttpResponseMessage response = client.GetAsync(request).Result;
-
-            var result = await response.Content.ReadAsStringAsync();
-
-            List<ShortRate> firstRates = JsonConvert.DeserializeObject<List<ShortRate>>(result);
-
-            var line1 = new OxyPlot.Series.LineSeries()
+            
+            if (ValidateDateTime())
             {
-                Title = $"Series 1",
-                Color = OxyPlot.OxyColors.Blue,
-                StrokeThickness = 1,
-            };
+                var request = $"rates/dynamics/{curr.Cur_ID}?startDate={startDate.ToString("yyyy-M-d")}&endDate={endDate.ToString("yyyy - M - d")}";
 
-            var line2 = new OxyPlot.Series.LineSeries()
-            {
-                Title = $"Series 2",
-                Color = OxyPlot.OxyColors.Red,
-                StrokeThickness = 1,
-            };
+                HttpResponseMessage response = client.GetAsync(request).Result;
 
-            var plotModel1 = new PlotModel();
-            plotModel1.Title = "Diagram";
-            var linearAxis1 = new LinearAxis();
-            linearAxis1.Position = AxisPosition.Bottom;
-            plotModel1.Axes.Add(linearAxis1);
-            var linearAxis2 = new LinearAxis();
-            plotModel1.Axes.Add(linearAxis2);
-            foreach (var rate in firstRates)
-            {
-                line1.Points.Add(new OxyPlot.DataPoint(rate.Date.DayOfYear, (double)rate.Cur_OfficialRate));
+                var result = await response.Content.ReadAsStringAsync();
+
+                List<ShortRate> firstRates = JsonConvert.DeserializeObject<List<ShortRate>>(result);
+
+                var line1 = new OxyPlot.Series.LineSeries()
+                {
+                    Title = $"Series 1",
+                    Color = OxyPlot.OxyColors.Blue,
+                    StrokeThickness = 1,
+                };
+
+                var plotModel1 = new PlotModel();
+                plotModel1.Title = "Diagram";
+                var linearAxis1 = new LinearAxis();
+                linearAxis1.Position = AxisPosition.Bottom;
+                plotModel1.Axes.Add(linearAxis1);
+                var linearAxis2 = new LinearAxis();
+                plotModel1.Axes.Add(linearAxis2);
+                foreach (var rate in firstRates)
+                {
+                    line1.Points.Add(new OxyPlot.DataPoint(rate.Date.DayOfYear, (double)rate.Cur_OfficialRate));
+                }
+
+                plotModel1.Series.Add(line1);
+                plotDiagram.Model = plotModel1;
+
+                var max = firstRates.Select(c => c.Cur_OfficialRate).Max();
+                var min = firstRates.Select(c => c.Cur_OfficialRate).Min();
+                var average = firstRates.Select(c => c.Cur_OfficialRate).Average();
+
+                maxLabel.Text = $"Max: {max}";
+                minLabel.Text = $"Min: {min}";
+                averageLabel.Text = $"Average: {string.Format("{0:F4}", average)}";
             }
+        }
 
-            plotModel1.Series.Add(line1);
-            plotModel1.Series.Add(line2);
-            plotDiagram.Model = plotModel1;
+        private bool ValidateDateTime()
+        {
+            if (startDateTime.Value > endDateTime.Value)
+            {
+                MessageBox.Show("Start date should be less than end date");
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -35,11 +35,14 @@
             this.startDateTime = new System.Windows.Forms.DateTimePicker();
             this.plotDiagram = new OxyPlot.WindowsForms.PlotView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.maxLabel = new System.Windows.Forms.Label();
+            this.minLabel = new System.Windows.Forms.Label();
+            this.averageLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnShowDiagram
             // 
-            this.btnShowDiagram.Location = new System.Drawing.Point(654, 415);
+            this.btnShowDiagram.Location = new System.Drawing.Point(654, 473);
             this.btnShowDiagram.Name = "btnShowDiagram";
             this.btnShowDiagram.Size = new System.Drawing.Size(123, 23);
             this.btnShowDiagram.TabIndex = 17;
@@ -50,7 +53,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(228, 384);
+            this.label2.Location = new System.Drawing.Point(228, 442);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 15);
             this.label2.TabIndex = 16;
@@ -60,7 +63,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label1.Location = new System.Drawing.Point(12, 384);
+            this.label1.Location = new System.Drawing.Point(12, 442);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 15);
             this.label1.TabIndex = 15;
@@ -68,7 +71,7 @@
             // 
             // endDateTime
             // 
-            this.endDateTime.Location = new System.Drawing.Point(228, 415);
+            this.endDateTime.Location = new System.Drawing.Point(228, 473);
             this.endDateTime.MaxDate = new System.DateTime(2021, 12, 7, 0, 0, 0, 0);
             this.endDateTime.MinDate = new System.DateTime(2016, 7, 1, 0, 0, 0, 0);
             this.endDateTime.Name = "endDateTime";
@@ -78,7 +81,7 @@
             // 
             // startDateTime
             // 
-            this.startDateTime.Location = new System.Drawing.Point(12, 415);
+            this.startDateTime.Location = new System.Drawing.Point(12, 473);
             this.startDateTime.MaxDate = new System.DateTime(2021, 12, 7, 0, 0, 0, 0);
             this.startDateTime.MinDate = new System.DateTime(2016, 7, 1, 0, 0, 0, 0);
             this.startDateTime.Name = "startDateTime";
@@ -101,16 +104,46 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(454, 415);
+            this.comboBox1.Location = new System.Drawing.Point(454, 473);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(166, 23);
             this.comboBox1.TabIndex = 19;
+            // 
+            // maxLabel
+            // 
+            this.maxLabel.AutoSize = true;
+            this.maxLabel.Location = new System.Drawing.Point(454, 385);
+            this.maxLabel.Name = "maxLabel";
+            this.maxLabel.Size = new System.Drawing.Size(36, 15);
+            this.maxLabel.TabIndex = 20;
+            this.maxLabel.Text = "Max: ";
+            // 
+            // minLabel
+            // 
+            this.minLabel.AutoSize = true;
+            this.minLabel.Location = new System.Drawing.Point(454, 413);
+            this.minLabel.Name = "minLabel";
+            this.minLabel.Size = new System.Drawing.Size(34, 15);
+            this.minLabel.TabIndex = 21;
+            this.minLabel.Text = "Min: ";
+            // 
+            // averageLabel
+            // 
+            this.averageLabel.AutoSize = true;
+            this.averageLabel.Location = new System.Drawing.Point(454, 442);
+            this.averageLabel.Name = "averageLabel";
+            this.averageLabel.Size = new System.Drawing.Size(56, 15);
+            this.averageLabel.TabIndex = 22;
+            this.averageLabel.Text = "Average: ";
             // 
             // ChartWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 508);
+            this.Controls.Add(this.averageLabel);
+            this.Controls.Add(this.minLabel);
+            this.Controls.Add(this.maxLabel);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.plotDiagram);
             this.Controls.Add(this.btnShowDiagram);
@@ -134,5 +167,8 @@
         private System.Windows.Forms.DateTimePicker startDateTime;
         private OxyPlot.WindowsForms.PlotView plotDiagram;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label maxLabel;
+        private System.Windows.Forms.Label minLabel;
+        private System.Windows.Forms.Label averageLabel;
     }
 }
