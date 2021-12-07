@@ -1,19 +1,10 @@
-﻿using bntu.vsrpp.vmilyuk.Core.Helper;
-using bntu.vsrpp.vmilyuk.Core.Models;
-using Newtonsoft.Json;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using bntu.vsrpp.vmilyuk.Core.Helper;
+using bntu.vsrpp.vmilyuk.Core.Models;
 
 namespace bntu.vsrpp.vmilyuk.lab2
 {

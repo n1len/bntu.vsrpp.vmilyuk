@@ -1,28 +1,18 @@
-﻿using bntu.vsrpp.vmilyuk.Core.Helper;
-using bntu.vsrpp.vmilyuk.Core.Models;
-using Newtonsoft.Json;
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Windows.Forms;
+
+using bntu.vsrpp.vmilyuk.Core.Helper;
+using bntu.vsrpp.vmilyuk.Core.Models;
+using OxyPlot;
 
 namespace bntu.vsrpp.vmilyuk.lab2
 {
     public partial class ChartWindow : Form
     {
-        private readonly HttpClient client = new HttpClient()
-        {
-            BaseAddress = new Uri("https://www.nbrb.by/api/exrates/")
-        };
-
         private List<Currency> currencies;
         private List<Currency> allCurrencies;
         private List<Currency> foundCurrencies = new List<Currency>();
@@ -110,7 +100,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                         StrokeThickness = 1,
                     };
                     var plotModel1 = new PlotModel();
-                    int i = 0;
+                    int i = 1;
                     foreach (var rate in rates)
                     {
                         line1.Points.Add(new OxyPlot.DataPoint(i, (double)rate.Cur_OfficialRate));

@@ -1,10 +1,10 @@
-﻿using bntu.vsrpp.vmilyuk.Core.Models;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+
+using bntu.vsrpp.vmilyuk.Core.Models;
+using Newtonsoft.Json;
 
 namespace bntu.vsrpp.vmilyuk.Core.Helper
 {
