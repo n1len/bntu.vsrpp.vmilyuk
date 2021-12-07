@@ -1,4 +1,5 @@
-﻿using bntu.vsrpp.vmilyuk.Core.Models;
+﻿using bntu.vsrpp.vmilyuk.Core.Helper;
+using bntu.vsrpp.vmilyuk.Core.Models;
 using Newtonsoft.Json;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -18,11 +19,6 @@ namespace bntu.vsrpp.vmilyuk.lab2
 {
     public partial class MainWindow : Form
     {
-        private readonly HttpClient client = new HttpClient()
-        {
-            BaseAddress = new Uri("https://www.nbrb.by/api/exrates/")
-        };
-
         private List<Currency> currencies;
 
         public MainWindow()
@@ -31,7 +27,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
             InitializeAllCurrency();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void btnFromRightToLeft_Click(object sender, EventArgs e)
         {
             Currency curr = null;
             float count = 0f;
@@ -40,33 +36,22 @@ namespace bntu.vsrpp.vmilyuk.lab2
                 if (comboBox1.SelectedItem.ToString() != "BYN")
                 {
                     curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox1.SelectedItem.ToString());
-
-                    HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
-
-                    var result = await response.Content.ReadAsStringAsync();
-
-                    var firstCurrency = JsonConvert.DeserializeObject<Rate>(result);
+                    var firstRate = await RateHelper.GetRate(curr);
 
                     if (comboBox2.SelectedItem.ToString() != "BYN")
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
-
-                        response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
-
-                        result = await response.Content.ReadAsStringAsync();
-
-                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
-
+                        var secondRate = await RateHelper.GetRate(curr);
                         float.TryParse(textBox2.Text, out count);
 
-                        textBox1.Text = (count * (firstCurrency.Cur_Scale / secondCurrency.Cur_Scale) *
-                            (float)(secondCurrency.Cur_OfficialRate / firstCurrency.Cur_OfficialRate)).ToString();
+                        textBox1.Text = (count * (firstRate.Cur_Scale / secondRate.Cur_Scale) *
+                            (float)(secondRate.Cur_OfficialRate / firstRate.Cur_OfficialRate)).ToString();
                     }
                     else
                     {
                         float.TryParse(textBox2.Text, out count);
 
-                        textBox1.Text = (count * (float)(firstCurrency.Cur_Scale) / (float)firstCurrency.Cur_OfficialRate).ToString();
+                        textBox1.Text = (count * (float)(firstRate.Cur_Scale) / (float)firstRate.Cur_OfficialRate).ToString();
                     }
                 }
                 else
@@ -74,13 +59,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     if (comboBox2.SelectedItem.ToString() != "BYN")
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
-
-                        HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
-
-                        var result = await response.Content.ReadAsStringAsync();
-
-                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
-
+                        var secondCurrency = await RateHelper.GetRate(curr);
                         float.TryParse(textBox2.Text, out count);
 
                         textBox1.Text = (count / (float)secondCurrency.Cur_Scale * (float)secondCurrency.Cur_OfficialRate).ToString();
@@ -91,9 +70,9 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Ошибка, низя такую конвертацию сделать.");
+                MessageBox.Show($"Error.{ex.Message}");
             }
         }
 
@@ -105,20 +84,16 @@ namespace bntu.vsrpp.vmilyuk.lab2
             comboBox1.SelectedItem = comboBox1.Items[0];
             comboBox2.SelectedItem = comboBox2.Items[0];
 
-            HttpResponseMessage response = client.GetAsync("rates?periodicity=0").Result;
+            currencies = await CurrencyHelper.GetCurrencies();
 
-            var result = await response.Content.ReadAsStringAsync();
-
-            currencies = JsonConvert.DeserializeObject<List<Currency>>(result);
-
-            foreach(var i in currencies)
+            foreach (var i in currencies)
             {
                 comboBox1.Items.Add(i.Cur_Name);
                 comboBox2.Items.Add(i.Cur_Name);
             }
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private async void btnFromLeftToRight_Click(object sender, EventArgs e)
         {
             Currency curr = null;
             float count = 0f;
@@ -127,33 +102,22 @@ namespace bntu.vsrpp.vmilyuk.lab2
                 if (comboBox1.SelectedItem.ToString() != "BYN")
                 {
                     curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox1.SelectedItem.ToString());
-
-                    HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
-
-                    var result = await response.Content.ReadAsStringAsync();
-
-                    var firstCurrency = JsonConvert.DeserializeObject<Rate>(result);
+                    var firstRate = await RateHelper.GetRate(curr);   
 
                     if (comboBox2.SelectedItem.ToString() != "BYN")
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
-
-                        response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
-
-                        result = await response.Content.ReadAsStringAsync();
-
-                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
-
+                        var secondRate = await RateHelper.GetRate(curr);
                         float.TryParse(textBox1.Text, out count);
 
-                        textBox2.Text = (count / (firstCurrency.Cur_Scale / secondCurrency.Cur_Scale) * 
-                            (float)(firstCurrency.Cur_OfficialRate / secondCurrency.Cur_OfficialRate)).ToString();
+                        textBox2.Text = (count / (firstRate.Cur_Scale / secondRate.Cur_Scale) * 
+                            (float)(firstRate.Cur_OfficialRate / secondRate.Cur_OfficialRate)).ToString();
                     }
                     else
                     {
                         float.TryParse(textBox1.Text, out count);
 
-                        textBox2.Text = (count / (float)firstCurrency.Cur_Scale * (float)firstCurrency.Cur_OfficialRate).ToString();
+                        textBox2.Text = (count / (float)firstRate.Cur_Scale * (float)firstRate.Cur_OfficialRate).ToString();
                     }
                 }
                 else
@@ -161,13 +125,7 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     if (comboBox2.SelectedItem.ToString() != "BYN")
                     {
                         curr = currencies.FirstOrDefault(c => c.Cur_Name == comboBox2.SelectedItem.ToString());
-
-                        HttpResponseMessage response = client.GetAsync($"rates/{curr.Cur_Abbreviation}?parammode=2").Result;
-
-                        var result = await response.Content.ReadAsStringAsync();
-
-                        var secondCurrency = JsonConvert.DeserializeObject<Rate>(result);
-
+                        var secondCurrency = await RateHelper.GetRate(curr);
                         float.TryParse(textBox1.Text, out count);
 
                         textBox2.Text = (count * secondCurrency.Cur_Scale / (float)secondCurrency.Cur_OfficialRate).ToString();
@@ -178,16 +136,19 @@ namespace bntu.vsrpp.vmilyuk.lab2
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Ошибка, низя такую конвертацию сделать.");
+                MessageBox.Show($"Error.{ex.Message}");
             }
             
         }
 
-        private void btnShowDiagram_Click(object sender, EventArgs e)
+        private async void btnShowDiagram_Click(object sender, EventArgs e)
         {
-            ChartWindow window = new ChartWindow(currencies);
+            var allCurrencies = await CurrencyHelper.GetAllCurrencies();
+            var dailyCurrencies = await CurrencyHelper.GetDailyCurrencies();
+
+            ChartWindow window = new ChartWindow(allCurrencies, dailyCurrencies);
             window.Show();
         }
     }

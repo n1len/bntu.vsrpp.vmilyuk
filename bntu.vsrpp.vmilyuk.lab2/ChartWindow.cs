@@ -1,4 +1,5 @@
-﻿using bntu.vsrpp.vmilyuk.Core.Models;
+﻿using bntu.vsrpp.vmilyuk.Core.Helper;
+using bntu.vsrpp.vmilyuk.Core.Models;
 using Newtonsoft.Json;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -23,10 +24,14 @@ namespace bntu.vsrpp.vmilyuk.lab2
         };
 
         private List<Currency> currencies;
+        private List<Currency> allCurrencies;
+        private List<Currency> foundCurrencies = new List<Currency>();
+        private List<Currency> foundCurrenciesChanged = new List<Currency>();
 
-        public ChartWindow(List<Currency> currencies)
+        public ChartWindow(List<Currency> allCurrencies,List<Currency> currencies)
         {
             this.currencies = currencies;
+            this.allCurrencies = allCurrencies;
             InitializeComponent();
             InitializeCurrencies();
         }
@@ -42,50 +47,91 @@ namespace bntu.vsrpp.vmilyuk.lab2
 
         private async void btnShowDiagram_Click(object sender, EventArgs e)
         {
-            if (ValidateDateTime())
+            try
             {
-                var curr = currencies.FirstOrDefault(c => (c.Cur_Scale + " " + c.Cur_Name) == comboBox1.SelectedItem.ToString());
-
-                var startDate = startDateTime.Value;
-                var endDate = endDateTime.Value;
-
-                var request = $"rates/dynamics/{curr.Cur_ID}?startDate={startDate:yyyy-M-d}&endDate={endDate:yyyy-M-d}";
-
-                HttpResponseMessage response = client.GetAsync(request).Result;
-
-                var result = await response.Content.ReadAsStringAsync();
-
-                List<ShortRate> firstRates = JsonConvert.DeserializeObject<List<ShortRate>>(result);
-
-                var line1 = new OxyPlot.Series.LineSeries()
+                if (ValidateDateTime())
                 {
-                    Title = $"Series 1",
-                    Color = OxyPlot.OxyColors.Blue,
-                    StrokeThickness = 1,
-                };
+                    var rates = new List<ShortRate>();
+                    var rateName = comboBox1.SelectedItem.ToString();
 
-                var plotModel1 = new PlotModel();
-                plotModel1.Title = "Diagram";
-                var linearAxis1 = new LinearAxis();
-                linearAxis1.Position = AxisPosition.Bottom;
-                plotModel1.Axes.Add(linearAxis1);
-                var linearAxis2 = new LinearAxis();
-                plotModel1.Axes.Add(linearAxis2);
-                foreach (var rate in firstRates)
-                {
-                    line1.Points.Add(new OxyPlot.DataPoint(rate.Date.DayOfYear, (double)rate.Cur_OfficialRate));
+                    var curDateTime = startDateTime.Value;
+                    var nextDateTime = endDateTime.Value;
+
+                    foundCurrencies = allCurrencies.FindAll(a => a.Cur_QuotName.Equals(rateName));
+                    foundCurrenciesChanged = allCurrencies.FindAll(a => a.Cur_QuotName.Equals(rateName));
+
+                    foreach (Currency item in foundCurrencies)
+                    {
+                        if (item.Cur_DateEnd < startDateTime.Value)
+                            foundCurrenciesChanged.Remove(item);
+                    }
+
+                    var currentRateId = foundCurrenciesChanged[0].Cur_ID;
+
+                    while (true)
+                    {
+                        if (curDateTime.AddDays(365) < foundCurrenciesChanged.Find(a => a.
+                                Cur_ID.Equals(currentRateId)).Cur_DateEnd)
+                        {
+                            if (curDateTime.AddDays(365) < endDateTime.Value)
+                            {
+                                nextDateTime = curDateTime.AddDays(365);
+                            }
+                            else
+                            {
+                                nextDateTime = endDateTime.Value;
+                            }
+                        }
+                        else
+                            nextDateTime = foundCurrenciesChanged.Find(a => a.
+                                Cur_ID.Equals(currentRateId)).Cur_DateEnd;;
+
+                        rates.AddRange(await RateHelper.GetShortRates(currentRateId, curDateTime, nextDateTime));
+                        curDateTime = nextDateTime.AddDays(1);
+
+                        if (nextDateTime.Equals(endDateTime.Value))
+                            break;
+
+                        if (curDateTime > foundCurrenciesChanged.Find(a => a.
+                            Cur_ID.Equals(currentRateId)).Cur_DateEnd)
+                        {
+                            if (foundCurrenciesChanged.Any(a => a.Cur_DateStart.Equals(curDateTime)))
+                                currentRateId = foundCurrenciesChanged.Find(a => a.Cur_DateStart.Equals(curDateTime)).
+                                    Cur_ID;
+                            else
+                                break;
+                        }
+                    }
+
+                    var line1 = new OxyPlot.Series.LineSeries()
+                    {
+                        Title = $"Rate",
+                        Color = OxyPlot.OxyColors.Blue,
+                        StrokeThickness = 1,
+                    };
+                    var plotModel1 = new PlotModel();
+                    int i = 0;
+                    foreach (var rate in rates)
+                    {
+                        line1.Points.Add(new OxyPlot.DataPoint(i, (double)rate.Cur_OfficialRate));
+                        i++;
+                    }
+
+                    plotModel1.Series.Add(line1);
+                    plotDiagram.Model = plotModel1;
+
+                    var max = rates.Select(c => c.Cur_OfficialRate).Max();
+                    var min = rates.Select(c => c.Cur_OfficialRate).Min();
+                    var average = rates.Select(c => c.Cur_OfficialRate).Average();
+
+                    maxLabel.Text = $"Max: {max}";
+                    minLabel.Text = $"Min: {min}";
+                    averageLabel.Text = $"Average: {string.Format("{0:F4}", average)}";
                 }
-
-                plotModel1.Series.Add(line1);
-                plotDiagram.Model = plotModel1;
-
-                var max = firstRates.Select(c => c.Cur_OfficialRate).Max();
-                var min = firstRates.Select(c => c.Cur_OfficialRate).Min();
-                var average = firstRates.Select(c => c.Cur_OfficialRate).Average();
-
-                maxLabel.Text = $"Max: {max}";
-                minLabel.Text = $"Min: {min}";
-                averageLabel.Text = $"Average: {string.Format("{0:F4}", average)}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error.{ex.Message}");
             }
         }
 
